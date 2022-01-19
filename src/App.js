@@ -29,39 +29,39 @@ function App() {
       return true;
     }
 
-    // // function to actually ask the permissions
-    // function handlePermission(permission) {
-    //   // set the button to shown or hidden, depending on what the user answers
-    //   if(Notification.permission === 'denied' || Notification.permission === 'default') {
-    //     enableNotifBtn.current.style.display = 'block';
-    //   } else {
-    //     enableNotifBtn.current.style.display = 'none';
-    //     // enableNotifBtn.current.style.background = '#ff0'
-    //   }
-    // }
+    // function to actually ask the permissions
+    function handlePermission(permission) {
+      // set the button to shown or hidden, depending on what the user answers
+      if(Notification.permission === 'denied' || Notification.permission === 'default') {
+        enableNotifBtn.current.style.display = 'block';
+      } else {
+        enableNotifBtn.current.style.display = 'none';
+        // enableNotifBtn.current.style.background = '#ff0'
+      }
+    }
   
-    // // Let's check if the browser supports notifications
-    // if (!('Notification' in window)) {
-    //   console.log("This browser does not support notifications.");
-    // } else {
-    //   if(checkNotificationPromise()) {
-    //     Notification.requestPermission()
-    //     .then((permission) => {
-    //       handlePermission(permission);
-    //     })
-    //   } else {
-    //     Notification.requestPermission(function(permission) {
-    //       handlePermission(permission);
-    //     });
-    //   }
-    // }
+    // Let's check if the browser supports notifications
+    if (!('Notification' in window)) {
+      console.log("This browser does not support notifications.");
+    } else {
+      if(checkNotificationPromise()) {
+        Notification.requestPermission()
+        .then((permission) => {
+          handlePermission(permission);
+        })
+      } else {
+        Notification.requestPermission(function(permission) {
+          handlePermission(permission);
+        });
+      }
+    }
   }
 
   return (
     <div className="App">
-      {/* <button onClick={() => askNotificationPermission()} ref={enableNotifBtn}>
+      <button onClick={() => askNotificationPermission()} ref={enableNotifBtn}>
         Enable Notifications
-      </button> */}
+      </button>
       <button onClick={() => showNotification()}>
         Show Notifications
       </button>
