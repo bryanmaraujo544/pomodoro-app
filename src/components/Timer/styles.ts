@@ -10,11 +10,13 @@ export const Container = styled.div`
   /* background: orange; */
 
   span {
-    padding: 4px;
+    padding: 6px;
+    user-select: none;
     cursor: pointer;
 
     svg {
       width: 42px;
+      filter: drop-shadow(0px 0px 16px #ffffff60);
     }
   }
 `;
@@ -35,6 +37,7 @@ export const Circle = styled.div`
 
 export const Time = styled.p`
   color: ${({ theme }) => theme.colors.white};
-  text-shadow: 0px 0px 24px #fff;
+  text-shadow: 0px 0px 24px #ffffff80;
   font-size: 3.2rem;
+  user-select: none;
 `;
