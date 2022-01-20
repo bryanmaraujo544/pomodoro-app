@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 24px;
   width: 100%;
   /* background: orange; */
@@ -25,7 +25,7 @@ export const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid ${({ theme }) => theme.colors.white};
+  border: 3px solid ${({ theme }) => theme.colors.white};
   border-radius: 50%;
   width: 22.5rem;
   height: 22.5rem;
