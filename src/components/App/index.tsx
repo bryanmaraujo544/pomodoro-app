@@ -10,6 +10,7 @@ import { theme } from '../../styles/theme';
 
 import { Logo } from '../Logo';
 import { Timer } from '../Timer';
+import { showNotification } from 'utils/showNotification';
 
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
@@ -33,12 +34,14 @@ function App() {
           if (prevMinutes === 0){
             setHasStarted(false);
             setIsInBreak(isBreakTime ? false : true); // When be in break state and time is over, we are coming back to initial state
-            setSeconds(0);
+            setSeconds(5);
             handleStopTimer();
+
+            showNotification({ isTaskMsg: isBreakTime });
 
             // When be in break state and time is over, we are setting the minutes as 25 (task time)
             // If not is break time that means we are in task screen. and when task is over we set minutes as 10(break default minute)
-            return isBreakTime ? 25 : 5; 
+            return isBreakTime ? 25 : 0; 
           }
           return prevMinutes - 1; // Decreasing the minutes value
         })
@@ -77,15 +80,10 @@ function App() {
     setIsInBreak(false);
     
   }
-
-
   
   function handleStopTimer() {
     clearInterval(intervalId?.current || 0);
   }
-
-
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -95,7 +93,10 @@ function App() {
         isInBreak={isInBreak}
       >
         <PomodoroContainer>
-          <Logo />
+          <Logo 
+            isInBreak={isInBreak}
+            hasStarted={hasStarted}
+          />
           <Timer 
             hasStarted={hasStarted}
             seconds={seconds}
