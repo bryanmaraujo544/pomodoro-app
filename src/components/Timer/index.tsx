@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Circle, Time } from './styles';
 
 interface Props{
@@ -13,7 +13,6 @@ interface Props{
 export const Timer = ({
   hasStarted,
   seconds, 
-  setSeconds,
   minutes,
   setMinutes,
   isInBreak,

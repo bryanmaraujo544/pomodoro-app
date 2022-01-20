@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Container, PomodoroContainer, Button } from './styles';
@@ -18,6 +18,7 @@ function App() {
   const [seconds, setSeconds] = useState(2);
 
   const intervalId = useRef(null); // IntervalId of the setInterval => Will be used to stop interval
+
   // useEffect(() => {
   //   askNotificationPermission();
   // }, []);
