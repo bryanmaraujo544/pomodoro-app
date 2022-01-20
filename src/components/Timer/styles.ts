@@ -15,7 +15,7 @@ export const Container = styled.div`
     cursor: pointer;
 
     svg {
-      width: 42px;
+      width: 4.2rem;
       filter: drop-shadow(0px 0px 16px #ffffff60);
     }
   }
@@ -31,6 +31,11 @@ export const Circle = styled.div`
   height: 22.5rem;
   aspect-ratio: 1 / 1;
   margin: 0;
+
+  /* @media(max-width: 468px) {
+    width: 20rem;
+    heigh
+  } */
 
 
 `;
