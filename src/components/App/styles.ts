@@ -21,7 +21,7 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
 
   ${({ theme, hasStarted, isInBreak }) => (
-    hasStarted ? css`
+    hasStarted && !isInBreak ? css`
       background: linear-gradient(to bottom, ${theme.colors.blue[300]}, ${theme.colors.blue[100]})
     ` : isInBreak ? css`
       background: linear-gradient(to bottom, ${theme.colors.orange[200]}, ${theme.colors.orange[100]})

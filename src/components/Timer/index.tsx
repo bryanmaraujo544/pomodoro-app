@@ -6,7 +6,8 @@ interface Props{
   seconds: number,
   setSeconds: any,
   minutes: number,
-  setMinutes: any
+  setMinutes: any,
+  isInBreak: boolean
 }
 
 export const Timer = ({
@@ -14,13 +15,18 @@ export const Timer = ({
   seconds, 
   setSeconds,
   minutes,
-  setMinutes
+  setMinutes,
+  isInBreak,
 }: Props) => {
 
 
   function handleDiminishTime() {
-    if (minutes > 10) {
-      setMinutes((prevState: number) => prevState - 5);
+    if (!isInBreak && minutes > 10) {
+      return setMinutes((prevState: number) => prevState - 5);
+    }
+
+    if (isInBreak && minutes > 5) {
+      return setMinutes((prevState: number) => prevState - 5);
     }
   }
 

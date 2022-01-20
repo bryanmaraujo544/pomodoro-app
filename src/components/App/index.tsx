@@ -14,15 +14,15 @@ import { Timer } from '../Timer';
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
   const [isInBreak, setIsInBreak] = useState(false);
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(2);
 
-  const intervalId = useRef(null);
+  const intervalId = useRef(null); // IntervalId of the setInterval => Will be used to stop interval
   // useEffect(() => {
   //   askNotificationPermission();
   // }, []);
 
-  function handleTimer() {
+  function handleTimer({ isBreakTime }: { isBreakTime: boolean }) {
     // I cannot grab secons state directly, because the value of state will be the value they were when the setIntervel has started
     // And to grab the updated state values, I need to use the prevState of the setFunctions.
     setSeconds((prevSeconds) => {
@@ -31,32 +31,56 @@ function App() {
           // When the seconds be 0 and minutes 0 IT'S OVER
           if (prevMinutes === 0){
             setHasStarted(false);
-            setIsInBreak(true);
+            setIsInBreak(isBreakTime ? false : true); // When be in break state and time is over, we are coming back to initial state
             setSeconds(0);
             handleStopTimer();
 
-            return 10; // Setting the minutes to the break time screen as 10
+            // When be in break state and time is over, we are setting the minutes as 25 (task time)
+            // If not is break time that means we are in task screen. and when task is over we set minutes as 10(break default minute)
+            return isBreakTime ? 25 : 5; 
           }
-          return prevMinutes - 1;
+          return prevMinutes - 1; // Decreasing the minutes value
         })
         return 59; // Changing the value of seconds from 00 to 59
       }
 
-      return prevSeconds - 1;
+      return prevSeconds - 1; // Decreasing the minutes value
     });
   }
 
-  function handleStopTimer() {
-    clearInterval(intervalId?.current || 0);
-  }
-  function handleStartTimer() {
+  function handleStartTaskTimer() {
     setHasStarted(true);
     
     const id: any = setInterval(() => {
-      handleTimer();
+      handleTimer({ isBreakTime: false });
     }, 1000);
-
+    
     intervalId.current = id;
+  }
+
+  function handleStartBreakTimer() {
+    setHasStarted(true);
+    const id: any = setInterval(() => {
+      handleTimer({ isBreakTime: true });
+    }, 1000);
+    
+    intervalId.current = id;
+  }
+
+  function handleResetTimer() {
+    handleStopTimer();
+
+    setMinutes(25);
+    setSeconds(0);
+    setHasStarted(false);
+    setIsInBreak(false);
+    
+  }
+
+
+  
+  function handleStopTimer() {
+    clearInterval(intervalId?.current || 0);
   }
 
 
@@ -77,19 +101,20 @@ function App() {
             setSeconds={setSeconds}
             minutes={minutes}
             setMinutes={setMinutes}
+            isInBreak={isInBreak}
           />
           <div className="buttons">
             {/* Initial State */}
             {!hasStarted && !isInBreak && (
-              <Button onClick={handleStartTimer} isStart>
+              <Button onClick={() => handleStartTaskTimer()} isStart>
                 Start
               </Button>
             )}
             
             {/* Started Timer State */}
-            {hasStarted && (
-              <Button onClick={handleStopTimer} isStop>
-                Stop
+            {hasStarted && !isInBreak && (
+              <Button onClick={() => handleResetTimer()} isStop>
+                Reset
               </Button>
             )}
 
@@ -97,14 +122,15 @@ function App() {
             {isInBreak && (
               <React.Fragment>
                 <Button 
-                  onClick={handleStartTimer} 
+                  onClick={() => handleStartBreakTimer()} 
                   isStart 
                   isInBreak
                 >
                   Start Break
                 </Button>
+
                 <Button 
-                  onClick={handleStartTimer} 
+                  onClick={handleResetTimer} 
                   isSkip 
                   isInBreak
                 >
