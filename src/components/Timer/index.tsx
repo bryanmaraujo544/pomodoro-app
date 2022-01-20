@@ -52,13 +52,11 @@ export const Timer = ({
   function calculateProgress() {
     const secondsInitialTime = initialTime * 60;
     const currentTotalSeconds = (minutes * 60) + seconds;
-
     
     const progressInDecimal = (((currentTotalSeconds * 100) / secondsInitialTime) / 100);
     console.log({progressInDecimal})
     setProgress(progressInDecimal);
   }
-
 
   // function handleTimer() {
 
@@ -72,14 +70,17 @@ export const Timer = ({
             <path d="M25.0012 28C28.1589 28 49 3.44748 49 2.04892C49 0.650358 41.3334 0.650358 41.3334 2.04892C41.3334 3.44748 26.7379 20.4268 25.0012 20.4268C23.2644 20.4268 8.66711 3.44748 8.66711 2.04892C8.66711 0.650358 0.844475 0.650358 1.00236 2.04892C1.16025 3.44748 21.8434 28 25.0012 28Z" fill="#F1F6FE" stroke="#F1F6FE"/>
           </svg>
         </span>
-
       )}
       <Circle progress={progress}>
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="22.5rem" height="22.5rem">
           <defs>
               <linearGradient id="GradientColor">
-                <stop offset="0%" stop-color="#e91e63" />
-                <stop offset="100%" stop-color="#673ab7" />
+                <stop offset="0%" stop-color={(
+                  !hasStarted && !isInBreak ? '#0D5CD3' : hasStarted && !isInBreak ? '#669FF5' : '#BEF566'
+                )} />
+                <stop offset="100%" stop-color={(
+                  !hasStarted && !isInBreak ? '#04193A' : hasStarted && !isInBreak ? '#0D5CD3' : '#70E000'
+                )} />
               </linearGradient>
           </defs>
           <circle cx="110" cy="110" r="100" stroke-linecap="round" />
