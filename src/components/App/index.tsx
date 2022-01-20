@@ -6,7 +6,7 @@ import { GlobalStyles } from '../../styles/global';
 import { theme } from '../../styles/theme';
 
 import { Logo } from '../Logo';
-import Player from 'components/Player';
+// import Player from 'components/Player';
 
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
