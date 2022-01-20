@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface CircleProps {
+  progress?: number,
+}
 
 export const Container = styled.div`
   display: flex;
@@ -21,7 +25,8 @@ export const Container = styled.div`
   }
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.div<CircleProps>`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,11 +36,31 @@ export const Circle = styled.div`
   height: 22.5rem;
   aspect-ratio: 1 / 1;
   margin: 0;
+  
 
   /* @media(max-width: 468px) {
     width: 20rem;
     heigh
   } */
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    stroke-dasharray: 627; /* 627 */
+    ${({ progress }) => css`
+      stroke-dashoffset: calc(627 - (${progress} * 627));
+    `};
+  }
+
+  circle {
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 10px;
+    
+  }
 
 
 `;

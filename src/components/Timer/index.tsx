@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Circle, Time } from './styles';
 
 interface Props{
@@ -17,7 +17,23 @@ export const Timer = ({
   setMinutes,
   isInBreak,
 }: Props) => {
+  const [initialTime, setInitialTime] = useState(minutes);
+  const [progress, setProgress] = useState(1);
+  console.log('initialTime', initialTime);
+  console.log('minutes', minutes);
 
+  useEffect(() => {
+    if (initialTime % 5 === 0 && !hasStarted) {
+      setInitialTime(minutes); 
+    }
+
+    if (hasStarted) {
+      calculateProgress();
+    } else {
+      setProgress(1);
+    }
+  }, [hasStarted, minutes, seconds]);
+  
 
   function handleDiminishTime() {
     if (!isInBreak && minutes > 10) {
@@ -33,6 +49,17 @@ export const Timer = ({
     setMinutes((prevState: number) => prevState + 5);
   }
 
+  function calculateProgress() {
+    const secondsInitialTime = initialTime * 60;
+    const currentTotalSeconds = (minutes * 60) + seconds;
+
+    
+    const progressInDecimal = (((currentTotalSeconds * 100) / secondsInitialTime) / 100);
+    console.log({progressInDecimal})
+    setProgress(progressInDecimal);
+  }
+
+
   // function handleTimer() {
 
   // }
@@ -47,19 +74,20 @@ export const Timer = ({
         </span>
 
       )}
-      <Circle>
+      <Circle progress={progress}>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="22.5rem" height="22.5rem">
+          <defs>
+              <linearGradient id="GradientColor">
+                <stop offset="0%" stop-color="#e91e63" />
+                <stop offset="100%" stop-color="#673ab7" />
+              </linearGradient>
+          </defs>
+          <circle cx="110" cy="110" r="100" stroke-linecap="round" />
+        </svg>
         <Time>
-          {minutes < 10 ? (
-            `0${minutes}`
-          ) : (
-            minutes
-          )}
+          {minutes < 10 ? ( `0${minutes}`) : (minutes)}
           :
-          {seconds < 10 ? (
-            `0${seconds}`
-          ) : (
-            `${seconds}`
-          )}
+          {seconds < 10 ? ( `0${seconds}`) : (`${seconds}`)}
         </Time>
       </Circle>
       {!hasStarted && (

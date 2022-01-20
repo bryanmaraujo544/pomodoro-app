@@ -5,9 +5,6 @@ import { Container, PomodoroContainer, Button } from './styles';
 import { GlobalStyles } from '../../styles/global';
 import { theme } from '../../styles/theme';
 
-// import { askNotificationPermission } from '../.././utils/askNotificationPermission';
-// import { showNotification } from '../.././utils/showNotification';
-
 import { Logo } from '../Logo';
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
@@ -15,14 +12,10 @@ import { showNotification } from 'utils/showNotification';
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
   const [isInBreak, setIsInBreak] = useState(false);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(2);
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
 
   const intervalId = useRef(null); // IntervalId of the setInterval => Will be used to stop interval
-
-  // useEffect(() => {
-  //   askNotificationPermission();
-  // }, []);
 
   function handleTimer({ isBreakTime }: { isBreakTime: boolean }) {
     // I cannot grab secons state directly, because the value of state will be the value they were when the setIntervel has started
@@ -34,14 +27,14 @@ function App() {
           if (prevMinutes === 0){
             setHasStarted(false);
             setIsInBreak(isBreakTime ? false : true); // When be in break state and time is over, we are coming back to initial state
-            setSeconds(5);
+            setSeconds(0);
             handleStopTimer();
 
             showNotification({ isTaskMsg: isBreakTime });
 
             // When be in break state and time is over, we are setting the minutes as 25 (task time)
             // If not is break time that means we are in task screen. and when task is over we set minutes as 10(break default minute)
-            return isBreakTime ? 25 : 0; 
+            return isBreakTime ? 25 : 5; 
           }
           return prevMinutes - 1; // Decreasing the minutes value
         })
@@ -78,7 +71,6 @@ function App() {
     setSeconds(0);
     setHasStarted(false);
     setIsInBreak(false);
-    
   }
   
   function handleStopTimer() {
@@ -142,12 +134,6 @@ function App() {
             )}
 
           </div>
-          {/* <button ref={enableNotifBtn}>
-            Enable Notifications
-          </button>
-          <button onClick={() => showNotification()}>
-            Show Notifications
-          </button> */}
         </PomodoroContainer>
       </Container>
     </ThemeProvider>
