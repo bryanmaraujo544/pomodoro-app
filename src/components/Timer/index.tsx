@@ -59,10 +59,6 @@ export const Timer = ({
     setProgress(progressInDecimal);
   }
 
-  // function handleTimer() {
-
-  // }
-
   return (
     <Container>
       {!hasStarted && (
@@ -76,15 +72,15 @@ export const Timer = ({
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="22.5rem" height="22.5rem">
           <defs>
               <linearGradient id="GradientColor">
-                <stop offset="0%" stop-color={(
+                <stop offset="0%" stopColor={(
                   !hasStarted && !isInBreak ? '#0D5CD3' : hasStarted && !isInBreak ? '#669FF5' : '#BEF566'
                 )} />
-                <stop offset="100%" stop-color={(
+                <stop offset="100%" stopColor={(
                   !hasStarted && !isInBreak ? '#04193A' : hasStarted && !isInBreak ? '#0D5CD3' : '#70E000'
                 )} />
               </linearGradient>
           </defs>
-          <circle cx="110" cy="110" r="100" stroke-linecap="round" />
+          <circle cx="110" cy="110" r="100" strokeLinecap="round" />
         </svg>
         <Time>
           {minutes < 10 ? ( `0${minutes}`) : (minutes)}

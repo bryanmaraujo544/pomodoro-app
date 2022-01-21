@@ -43,7 +43,7 @@ export const SearchInput = ({
         onChange={handleChangeSearchValue}
       />
       <button type="submit">
-        <FaSearch/>
+        <FaSearch color='#6C757D'/>
       </button>
     </Container>
   )

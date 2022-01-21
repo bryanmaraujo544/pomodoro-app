@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FcMusic } from 'react-icons/fc'
 
@@ -10,10 +11,14 @@ export const ButtonPlayer = ({
     setIsModalOpen(true);
   }
 
-
   return (
-    <Container onClick={() => handleOpenModal()}>
-      <FcMusic size={20}/>
+    <Container 
+      onClick={() => handleOpenModal()}
+      as={motion.button}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 1.1 }}
+    >
+      <FcMusic size="2rem" />
     </Container>
   )
 }

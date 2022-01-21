@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface BtnProps {
   isStart?: boolean,
@@ -19,17 +19,7 @@ export const Container = styled.div<ContainerProps>`
   justify-content: center;
   height: 100vh;
   width: 100%;
-
-  ${({ theme, hasStarted, isInBreak }) => (
-    hasStarted && !isInBreak ? css`
-      background: linear-gradient(to bottom, ${theme.colors.blue[300]}, ${theme.colors.blue[100]})
-    ` : isInBreak ? css`
-      background: linear-gradient(to bottom, ${theme.colors.orange[200]}, ${theme.colors.orange[100]})
-    ` : css`
-      background: linear-gradient(to bottom, ${theme.colors.blue[900]}, ${theme.colors.blue[700]})
-    `
-  )}
-  /* background: linear-gradient(to bottom, ; */
+  z-index: 10;
 `;
 
 export const PomodoroContainer = styled.main`

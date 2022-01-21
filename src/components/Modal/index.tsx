@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
@@ -7,6 +8,10 @@ import { SearchInput } from 'components/SeachInput';
 import ReactLoading from 'react-loading';
 
 import { IoClose } from 'react-icons/io5';
+import { motion, useAnimation } from 'framer-motion';
+
+import { overlayVariants } from 'variants/modal/overlayVariants';
+import { modalVariants } from 'variants/modal/modalVariants';
 
 export const Modal = ({
   setIsModalOpen,
@@ -14,6 +19,8 @@ export const Modal = ({
 }: any) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const controls = useAnimation();
 
   useEffect(() => {
     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCKl6Bud6TjwdOahcuSQ9AYQdyjKUeC2gw&type=video&&maxResults=2&q=matue').then(({ data }) => {
@@ -26,14 +33,33 @@ export const Modal = ({
     
   }, []);
 
+
+  useEffect(() => {
+    if (isModalOpen) {
+      controls.start("show")
+    } else {
+      controls.start("hidden");
+    }
+  }, [isModalOpen]);
+
+
   function handleCloseModal() {
     setIsModalOpen(false);
   }
 
+
   console.log({ items });
   return ReactDOM.createPortal(
-    <Overlay isModalOpen={isModalOpen}>
-      <ModalContainer>
+    <Overlay 
+      isModalOpen={isModalOpen}
+      as={motion.div}
+      variants={overlayVariants}
+      animate={controls}
+    >
+      <ModalContainer
+        as={motion.div}
+        variants={modalVariants}
+      >
         <div className="close-icon" onClick={handleCloseModal}>
           <IoClose className="icon" size="4.2rem" />
         </div>
@@ -52,29 +78,31 @@ export const Modal = ({
           
           {!isLoading && (
             <React.Fragment>
-              {items.map((item: {
+              {items?.length > 0 && items?.map((item: {
                 id: {
                   kind: string,
                   videoId: string
                 }
               }) => (
-                <Iframe 
-                  srcPath={item.id.videoId}
-                  key={item.id.videoId}
-                />
+                <div className="iframe-container">
+                  <Iframe 
+                    srcPath={item.id.videoId}
+                    key={item.id.videoId}
+                  />
+                </div>
               ))}
             </React.Fragment>
           )}
 
         </div>
-       </ModalContainer>
-     </Overlay>,
-     document?.getElementById('modal-root') as Element,
-     );
-    };
+      </ModalContainer>
+    </Overlay>,
+    document?.getElementById('modal-root') as Element,
+  );
+};
     
 export const Iframe = ({ srcPath }: { srcPath: string, key: any }) => {
   return (
-    <iframe width="auto" height="315" src={`https://www.youtube.com/embed/${srcPath}`}  title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    <iframe src={`https://www.youtube.com/embed/${srcPath}`}  title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
   )
 }

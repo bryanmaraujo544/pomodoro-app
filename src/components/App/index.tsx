@@ -11,10 +11,11 @@ import { Modal } from '../Modal';
 
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
+import { motion } from 'framer-motion';
 
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
-  const [isInBreak, setIsInBreak] = useState(false);
+  const [isInBreak, setIsInBreak] = useState(true);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
 
@@ -86,8 +87,18 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles/>
       <Container
+        as={motion.div}
         hasStarted={hasStarted}
         isInBreak={isInBreak}
+        animate={{
+          background: !hasStarted && !isInBreak ? (
+            'linear-gradient(to bottom, #04193A, #083172)'
+          ) : hasStarted && !isInBreak ? (
+            'linear-gradient(to bottom, #0D5CD3, #2E7DF2)'
+          ) : (
+            'linear-gradient(to bottom, #70E000, #BEF566)'
+          )
+        }}
       >
         <PomodoroContainer>
           <Logo 
