@@ -12,10 +12,11 @@ import { Modal } from '../Modal';
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
 import { motion } from 'framer-motion';
+import { useAudio } from 'hooks/useAudio';
 
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
-  const [isInBreak, setIsInBreak] = useState(true);
+  const [isInBreak, setIsInBreak] = useState(false);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
 
@@ -53,7 +54,7 @@ function App() {
 
   function handleStartTaskTimer() {
     setHasStarted(true);
-    
+
     const id: any = setInterval(() => {
       handleTimer({ isBreakTime: false });
     }, 1000);
@@ -82,6 +83,8 @@ function App() {
   function handleStopTimer() {
     clearInterval(intervalId?.current || 0);
   }
+
+  // const [isPlaying, setIsPlaying, audio] = useAudio("./deduction-588.ogg");
 
   return (
     <ThemeProvider theme={theme}>

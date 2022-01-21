@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from 'styled-components';
+import React from 'react';
 import { Container } from './styles';
 
 interface Props {
@@ -11,8 +10,7 @@ export const Logo = ({
   isInBreak,
   hasStarted
 }: Props) => {
-  const theme = useContext(ThemeContext);
-  console.log({ theme });
+  
   return (
     <Container>
       {hasStarted && !isInBreak && (

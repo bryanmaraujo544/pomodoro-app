@@ -30,7 +30,6 @@ export const SearchInput = ({
     }).catch((error) => {
       console.log('ERROR YOU', error);
     })
-    console.log('on submit');
   }
 
   return (

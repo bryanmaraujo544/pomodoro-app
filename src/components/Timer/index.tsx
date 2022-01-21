@@ -20,8 +20,6 @@ export const Timer = ({
 }: Props) => {
   const [initialTime, setInitialTime] = useState(minutes);
   const [progress, setProgress] = useState(1);
-  console.log('initialTime', initialTime);
-  console.log('minutes', minutes);
 
   useEffect(() => {
     if (initialTime % 5 === 0 && !hasStarted) {

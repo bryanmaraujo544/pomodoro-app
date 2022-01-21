@@ -24,7 +24,6 @@ export const Modal = ({
 
   useEffect(() => {
     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCKl6Bud6TjwdOahcuSQ9AYQdyjKUeC2gw&type=video&&maxResults=2&q=matue').then(({ data }) => {
-      console.log('RESPONSE YOU', data);
       setItems(data.items);
       setIsLoading(false);
     }).catch((error) => {
@@ -47,8 +46,6 @@ export const Modal = ({
     setIsModalOpen(false);
   }
 
-
-  console.log({ items });
   return ReactDOM.createPortal(
     <Overlay 
       isModalOpen={isModalOpen}
