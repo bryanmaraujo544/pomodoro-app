@@ -1,5 +1,5 @@
 import React from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa'
 
@@ -22,7 +22,7 @@ export const SearchInput = ({
     if (searchValue === '') {
       return window.alert('Do not let any empty field');
     }
-    
+
     axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCKl6Bud6TjwdOahcuSQ9AYQdyjKUeC2gw&type=video&&maxResults=2&q=${searchValue}`).then(({ data }) => {
       console.log('RESPONSE YOU', data);
       setItems(data.items);

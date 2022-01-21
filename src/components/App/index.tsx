@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
-import axios, { AxiosRequestConfig } from 'axios';
 
 import { Container, PomodoroContainer, Button } from './styles';
 import { GlobalStyles } from '../../styles/global';
@@ -18,10 +17,6 @@ function App() {
   const [isInBreak, setIsInBreak] = useState(false);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-
-  })
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

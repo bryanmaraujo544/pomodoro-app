@@ -15,8 +15,6 @@ export const Modal = ({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    {/* AIzaSyCKl6Bud6TjwdOahcuSQ9AYQdyjKUeC2gw */}
-    {/* https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCKl6Bud6TjwdOahcuSQ9AYQdyjKUeC2gw&type=video&q=ajax */}
     axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCKl6Bud6TjwdOahcuSQ9AYQdyjKUeC2gw&type=video&&maxResults=2&q=matue').then(({ data }) => {
       console.log('RESPONSE YOU', data);
       setItems(data.items);
