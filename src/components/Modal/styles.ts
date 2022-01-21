@@ -16,6 +16,7 @@ export const Overlay = styled.div<OverlayProps>`
   align-items: center;
   justify-content: center;
   padding: 32px;
+  overflow: hidden;
 
 `;
 
