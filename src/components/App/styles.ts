@@ -37,6 +37,12 @@ export const PomodoroContainer = styled.main`
   max-width: 450px;
   width: 100%;
   height: 100vh;
+
+  header {
+    width: 100%;
+    max-width:300px;
+    text-align: center;
+  }
   
   .buttons {
     display: flex;

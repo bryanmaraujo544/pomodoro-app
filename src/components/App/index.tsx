@@ -5,13 +5,13 @@ import { Container, PomodoroContainer, Button } from './styles';
 import { GlobalStyles } from '../../styles/global';
 import { theme } from '../../styles/theme';
 
-import { Logo } from '../Logo';
 import { ButtonPlayer } from 'components/ButtonPlayer';
 import { Modal } from '../Modal';
 
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
 import { motion } from 'framer-motion';
+import { Selector } from 'components/Selector';
 
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
@@ -103,10 +103,19 @@ function App() {
         }}
       >
         <PomodoroContainer>
-          <Logo 
-            isInBreak={isInBreak}
-            hasStarted={hasStarted}
-          />
+          <header>
+            {/* <Logo 
+              isInBreak={isInBreak}
+              hasStarted={hasStarted}
+            /> */}
+            <Selector 
+              hasStarted={hasStarted}
+              setHasStarted={setHasStarted}
+              isInBreak={isInBreak}
+              setIsInBreak={setIsInBreak}
+            />
+          </header>
+
           <Timer 
             hasStarted={hasStarted}
             seconds={seconds}
