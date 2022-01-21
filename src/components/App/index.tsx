@@ -12,7 +12,6 @@ import { Modal } from '../Modal';
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
 import { motion } from 'framer-motion';
-import { useAudio } from 'hooks/useAudio';
 
 function App() {
   const [hasStarted, setHasStarted] = useState(false);
