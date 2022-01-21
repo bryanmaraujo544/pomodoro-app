@@ -16,7 +16,5 @@ export const useAudio = (url: string) => {
     };
   }, []);
 
-  console.log({ playing });
-
   return [playing, setPlaying, audio] as any;
 }

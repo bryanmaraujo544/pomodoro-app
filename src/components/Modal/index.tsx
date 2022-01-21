@@ -52,6 +52,7 @@ export const Modal = ({
       as={motion.div}
       variants={overlayVariants}
       animate={controls}
+      style={{ zIndex: -1 }}
     >
       <ModalContainer
         as={motion.div}

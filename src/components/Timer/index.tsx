@@ -53,7 +53,6 @@ export const Timer = ({
     const currentTotalSeconds = (minutes * 60) + seconds;
     
     const progressInDecimal = (((currentTotalSeconds * 100) / secondsInitialTime) / 100);
-    console.log({progressInDecimal})
     setProgress(progressInDecimal);
   }
 
