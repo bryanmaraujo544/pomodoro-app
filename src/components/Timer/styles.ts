@@ -6,12 +6,10 @@ interface CircleProps {
 
 export const Container = styled.div`
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 2.4rem;
   width: 100%;
-  /* background: orange; */
 
   span {
     padding: 6px;
@@ -36,6 +34,16 @@ export const Circle = styled.div<CircleProps>`
   height: 22.5rem;
   aspect-ratio: 1 / 1;
   margin: 0;
+
+  @media(max-width: 400px) {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  @media(max-width: 270px) {
+    width: 18rem;
+    height: 18rem;
+  }
   
 
   /* @media(max-width: 468px) {
@@ -66,16 +74,28 @@ export const Circle = styled.div<CircleProps>`
       r: 89;
     }
 
-    @media(max-width: 368px) {
-      cx: 87;
-      cy: 87;
+    @media(max-width: 400px) {
       r: 77;
+      cx: 88;
+      cy: 87;
+    }
+
+    @media(max-width: 368px) {
+      cx: 77;
+      cy: 77;
+      r: 69;
     }
 
     @media(max-width: 334px) {
-      cx: 76;
-      cy: 76;
-      r: 66;
+      r: 60;
+      cx: 67;
+      cy: 67;
+    }
+
+    @media(max-width: 270px) {
+      r: 53;
+      cx: 60;
+      cy: 60;
     }
     
   }
