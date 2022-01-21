@@ -1,12 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
+import axios, { AxiosRequestConfig } from 'axios';
 
 import { Container, PomodoroContainer, Button } from './styles';
 import { GlobalStyles } from '../../styles/global';
 import { theme } from '../../styles/theme';
 
 import { Logo } from '../Logo';
-// import Player from 'components/Player';
+import { ButtonPlayer } from 'components/ButtonPlayer';
+import { Modal } from '../Modal';
 
 import { Timer } from '../Timer';
 import { showNotification } from 'utils/showNotification';
@@ -16,6 +18,12 @@ function App() {
   const [isInBreak, setIsInBreak] = useState(false);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+
+  })
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const intervalId = useRef(null); // IntervalId of the setInterval => Will be used to stop interval
 
@@ -138,7 +146,8 @@ function App() {
           </div>
         </PomodoroContainer>
       </Container>
-      {/* <Player/> */}
+      <ButtonPlayer setIsModalOpen={setIsModalOpen} />
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
     </ThemeProvider>
   );
 }
