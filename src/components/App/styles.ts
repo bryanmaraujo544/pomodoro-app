@@ -17,9 +17,14 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
   height: 100vh;
   width: 100%;
   z-index: 10;
+
+  @media(max-width: 468px) {
+    height: 100%;
+  }
 `;
 
 export const PomodoroContainer = styled.main`
@@ -27,10 +32,11 @@ export const PomodoroContainer = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 32px;
+  padding: 1.6rem;
   height: 100%;
-  width: 100%;
   max-width: 450px;
+  width: 100%;
+  height: 100vh;
   
   .buttons {
     display: flex;

@@ -58,7 +58,7 @@ export const Circle = styled.div<CircleProps>`
   circle {
     fill: none;
     stroke: url(#GradientColor);
-    stroke-width: 10px;
+    stroke-width: 1rem;
 
     @media(max-width: 468px) {
       cx: 99;
