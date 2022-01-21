@@ -142,7 +142,7 @@ function App() {
         </PomodoroContainer>
       </Container>
       <ButtonPlayer setIsModalOpen={setIsModalOpen} />
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
+      <Modal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
     </ThemeProvider>
   );
 }

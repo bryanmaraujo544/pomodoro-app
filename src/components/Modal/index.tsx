@@ -9,7 +9,8 @@ import ReactLoading from 'react-loading';
 import { IoClose } from 'react-icons/io5';
 
 export const Modal = ({
-  setIsModalOpen
+  setIsModalOpen,
+  isModalOpen
 }: any) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +32,7 @@ export const Modal = ({
 
   console.log({ items });
   return ReactDOM.createPortal(
-    <Overlay>
+    <Overlay isModalOpen={isModalOpen}>
       <ModalContainer>
         <div className="close-icon" onClick={handleCloseModal}>
           <IoClose className="icon" size="4.2rem" />

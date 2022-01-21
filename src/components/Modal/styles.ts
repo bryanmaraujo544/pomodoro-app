@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const Overlay = styled.div`
+interface OverlayProps {
+  isModalOpen: boolean
+}
+
+export const Overlay = styled.div<OverlayProps>`
+  display: none;
   background: #00000080;
   position: absolute;
   top: 0;
@@ -8,7 +13,7 @@ export const Overlay = styled.div`
   right: 0;
   bottom: 0;
 
-  display: flex;
+  display: ${({ isModalOpen }) => isModalOpen ? 'flex' : 'none'};
   align-items: center;
   justify-content: center;
 
