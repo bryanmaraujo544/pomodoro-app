@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Container, PomodoroContainer, Button } from './styles';
@@ -18,6 +18,13 @@ function App() {
   const [isInBreak, setIsInBreak] = useState(false);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
+  
+  // This useEffect changes the value of the timer between 5 and 25 when we changes between task and break time when they are stopped
+  useEffect(() => {
+    if (!hasStarted) {
+      isInBreak ? setMinutes(5) : setMinutes(25);
+    }
+  }, [isInBreak])
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,18 +36,13 @@ function App() {
     setSeconds((prevSeconds) => {
       if (prevSeconds === 0) {
         setMinutes((prevMinutes) => {
-          // When the seconds be 0 and minutes 0 IT'S OVER
+          // When the seconds be 0 and minutes 0 === IT'S OVER
           if (prevMinutes === 0){
             setHasStarted(false);
             setIsInBreak(isBreakTime ? false : true); // When be in break state and time is over, we are coming back to initial state
             setSeconds(0);
             handleStopTimer();
-
-            showNotification({ isTaskMsg: isBreakTime });
-
-            // When be in break state and time is over, we are setting the minutes as 25 (task time)
-            // If not is break time that means we are in task screen. and when task is over we set minutes as 10(break default minute)
-            return isBreakTime ? 25 : 5; 
+            showNotification({ isTaskMsg: isBreakTime });; 
           }
           return prevMinutes - 1; // Decreasing the minutes value
         })
