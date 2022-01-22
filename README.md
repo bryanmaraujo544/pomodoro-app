@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Pomodoro App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-## Available Scripts
+![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-In the project directory, you can run:
+![Animação](https://user-images.githubusercontent.com/62571814/150646933-85d00612-1b66-4a80-b845-8e38c8ce8145.gif)
 
-### `npm start`
+> Application to set a time of work and of break based on Pomodoro technique.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Access the application on your browser and download on your desktop and mobile if you want [Pomodoro App](https://https://pomodoro-app-silk.vercel.app/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## 💻 How it works
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The application is a timer based on Pomodoro technique where the user can set a time to make some acitivitie and when that time ends, a break time is setted. The user can play some youtube video in background while he finishes the work.
 
-### `npm run build`
+## 💻 How it was made
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+It's a PWA (Progressive Web App) application, made using React and TypeScipt. The idea of PWA is make the application runs in differents platforms with one unique source of code.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Technologies used in project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- TypeScript
+- Styled-Components
+- Framer Motion
+- Axios
 
-### `npm run eject`
+## ☕ How to start the project in your machine
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Once the repository is cloned in your computer, to use the dev-world follow the steps below:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+  // Open one terminal and run the following code to install all dependencies:
+  yarn add
+  
+  // Then start the application
+  yarn start
+```
+Now you can access the application in http://localhost:3000
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📫 Contributing to dev-world
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To contribute, follow the next steps:
 
-## Learn More
+1. Fork this repository.
+2. Create a new branch: `git checkout -b <branch_name>`.
+3. Make your changes and confirm them: `git commit -m '<commit_message>'`
+4. Send to the main branch: `git push origin <project_name> / <local>`
+5. Create the pull request.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+As an alternative, check the documentation of the Github to lear how to make a pull request: (https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🤝 Developer
 
-### Code Splitting
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/bryanmaraujo544.png" width="100px;" alt="Bryan's profile photo"/><br>
+        <sub>
+          <b>Bryan Martins</b>
+        </sub>
+      </a>
+    </td>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+</table>
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
