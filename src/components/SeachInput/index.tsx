@@ -23,13 +23,13 @@ export const SearchInput = ({
       return window.alert('Do not let any empty field');
     }
 
-    // axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCWrEZ2sdh-zbgLGCLvXvC_zHKkYvHQWe0&type=video&&maxResults=2&q=${searchValue}`).then(({ data }) => {
-    //   console.log('RESPONSE YOU', data);
-    //   setItems(data.items);
-    //   setIsLoading(false);
-    // }).catch((error) => {
-    //   console.log('ERROR YOU', error);
-    // })
+    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCWrEZ2sdh-zbgLGCLvXvC_zHKkYvHQWe0&type=video&&maxResults=2&q=${searchValue}`).then(({ data }) => {
+      console.log('RESPONSE YOU', data);
+      setItems(data.items);
+      setIsLoading(false);
+    }).catch((error) => {
+      console.log('ERROR YOU', error);
+    })
   }
 
   return (
