@@ -22,15 +22,15 @@ export const Modal = ({
 
   const controls = useAnimation();
 
-  useEffect(() => {
-    axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCWrEZ2sdh-zbgLGCLvXvC_zHKkYvHQWe0&type=video&&maxResults=2&q=matue').then(({ data }) => {
-      setItems(data.items);
-      setIsLoading(false);
-    }).catch((error) => {
-      console.log('ERROR YOU', error);
-    })
+  // useEffect(() => {
+  //   axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCWrEZ2sdh-zbgLGCLvXvC_zHKkYvHQWe0&type=video&&maxResults=2&q=matue').then(({ data }) => {
+  //     setItems(data.items);
+  //     setIsLoading(false);
+  //   }).catch((error) => {
+  //     console.log('ERROR YOU', error);
+  //   })
     
-  }, []);
+  // }, []);
 
 
   useEffect(() => {

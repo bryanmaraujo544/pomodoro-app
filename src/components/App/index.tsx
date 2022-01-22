@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Container, PomodoroContainer, Button } from './styles';
@@ -19,74 +19,68 @@ function App() {
   const [isInBreak, setIsInBreak] = useState(false);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const intervalId = useRef(null); // IntervalId of the setInterval => Will be used to stop interval
+  
   
   // This useEffect changes the value of the timer between 5 and 25 when we changes between task and break time when they are stopped
   useEffect(() => {
     if (!hasStarted) {
       isInBreak ? setMinutes(5) : setMinutes(25);
     }
-  }, [isInBreak])
+  }, [isInBreak]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const intervalId = useRef(null); // IntervalId of the setInterval => Will be used to stop interval
-
-  function handleTimer({ isBreakTime }: { isBreakTime: boolean }) {
+  useEffect(() => {
+    handleMinutes();
+  }, [seconds])
+  
+  function handleSeconds() {
     // I cannot grab secons state directly, because the value of state will be the value they were when the setIntervel has started
     // And to grab the updated state values, I need to use the prevState of the setFunctions.
     setSeconds((prevSeconds) => {
       if (prevSeconds === 0) {
-        setMinutes((prevMinutes) => {
-          // When the seconds be 0 and minutes 0 === IT'S OVER
-          if (prevMinutes === 0){
-            setHasStarted(false);
-            setIsInBreak(isBreakTime ? false : true); // When be in break state and time is over, we are coming back to initial state
-            setSeconds(0);
-            handleStopTimer();
-            showNotification({ isTaskMsg: isBreakTime });; 
-          }
-          return prevMinutes - 1; // Decreasing the minutes value
-        })
         return 59; // Changing the value of seconds from 00 to 59
       }
-
+      
       return prevSeconds - 1; // Decreasing the minutes value
     });
   }
-
-  function handleStartTaskTimer() {
+  
+  function handleMinutes() {
+    if (seconds === 59 && minutes !== 0 && hasStarted){
+      setMinutes(minutes => minutes - 1);
+    } else if (minutes === 0 && seconds === 0) {
+      setHasStarted(false);
+      setIsInBreak(isInBreak ? false : true); // When be in break state and time is over, we are coming back to initial state
+      setSeconds(0);
+      handleStopTimer();
+      showNotification({ isTaskMsg: isInBreak });;
+    }
+  }
+  
+  const handleStartTimer = useCallback(() => {
     setHasStarted(true);
-
+    
     const id: any = setInterval(() => {
-      handleTimer({ isBreakTime: false });
+      handleSeconds();
     }, 1000);
     
     intervalId.current = id;
-  }
+  }, [intervalId?.current]);
 
-  function handleStartBreakTimer() {
-    setHasStarted(true);
-    const id: any = setInterval(() => {
-      handleTimer({ isBreakTime: true });
-    }, 1000);
-    
-    intervalId.current = id;
-  }
-
-  function handleResetTimer() {
+  const handleResetTimer = useCallback(() => {
     handleStopTimer();
-
     setMinutes(25);
     setSeconds(0);
     setHasStarted(false);
     setIsInBreak(false);
-  }
-  
-  function handleStopTimer() {
-    clearInterval(intervalId?.current || 0);
-  }
+  }, []);
 
-  // const [isPlaying, setIsPlaying, audio] = useAudio("./deduction-588.ogg");
+  const handleStopTimer = useCallback(() => {
+    clearInterval(intervalId?.current || 0);
+
+  }, [intervalId?.current]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -99,7 +93,7 @@ function App() {
           background: !hasStarted && !isInBreak ? (
             'linear-gradient(to bottom, #04193A, #083172)'
           ) : hasStarted && !isInBreak ? (
-            'linear-gradient(to bottom, #0D5CD3, #2E7DF2)'
+            'linear-gradient(to bottom, #083172, #2E7DF2)'
           ) : (
             'linear-gradient(to bottom, #70E000, #BEF566)'
           )
@@ -107,10 +101,6 @@ function App() {
       >
         <PomodoroContainer>
           <header>
-            {/* <Logo 
-              isInBreak={isInBreak}
-              hasStarted={hasStarted}
-            /> */}
             <Selector 
               hasStarted={hasStarted}
               setHasStarted={setHasStarted}
@@ -130,14 +120,26 @@ function App() {
           <div className="buttons">
             {/* Initial State */}
             {!hasStarted && !isInBreak && (
-              <Button onClick={() => handleStartTaskTimer()} isStart>
+              <Button 
+                onClick={() => handleStartTimer()} 
+                isStart
+                as={motion.button}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 Start
               </Button>
             )}
             
             {/* Started Timer State */}
             {hasStarted && !isInBreak && (
-              <Button onClick={() => handleResetTimer()} isStop>
+              <Button 
+                onClick={() => handleResetTimer()} 
+                isStop
+                as={motion.button}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 Reset
               </Button>
             )}
@@ -146,9 +148,12 @@ function App() {
             {isInBreak && (
               <React.Fragment>
                 <Button 
-                  onClick={() => handleStartBreakTimer()} 
+                  onClick={() => handleStartTimer()} 
                   isStart 
                   isInBreak
+                  as={motion.button}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   Start Break
                 </Button>
@@ -157,6 +162,9 @@ function App() {
                   onClick={handleResetTimer} 
                   isSkip 
                   isInBreak
+                  as={motion.button}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   Skip Break
                 </Button>

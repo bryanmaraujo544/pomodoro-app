@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Container, Circle, Time } from './styles';
 
 interface Props{
@@ -22,7 +23,8 @@ export const Timer = ({
   const [progress, setProgress] = useState(1);
 
   useEffect(() => {
-    if (initialTime % 5 === 0 && !hasStarted) {
+    // Updating the values of initialTime to the new time chosen when the app is stopped
+    if (!hasStarted) {
       setInitialTime(minutes); 
     }
 
@@ -33,47 +35,46 @@ export const Timer = ({
     }
   }, [hasStarted, minutes, seconds]);
   
-
-  function handleDiminishTime() {
+  const handleDiminishTime = useCallback(() => {
     if (!isInBreak && minutes > 10) {
       return setMinutes((prevState: number) => prevState - 5);
     }
-
+  
     if (isInBreak && minutes > 5) {
       return setMinutes((prevState: number) => prevState - 5);
     }
-  }
+  }, [minutes, isInBreak]);
 
-  function handleIncreaseTime() {
+  const handleIncreaseTime = useCallback(() => {
     setMinutes((prevState: number) => prevState + 5);
-  }
+  }, []);
 
-  function calculateProgress() {
+  const calculateProgress = useCallback(() => {
     const secondsInitialTime = initialTime * 60;
     const currentTotalSeconds = (minutes * 60) + seconds;
     
     const progressInDecimal = (((currentTotalSeconds * 100) / secondsInitialTime) / 100);
     setProgress(progressInDecimal);
-  }
+  }, [initialTime, minutes, seconds]);
 
   return (
     <Container>
       {!hasStarted && (
-        <span onClick={handleDiminishTime}>
+        <motion.span onClick={handleDiminishTime} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
           <svg width="50" height="29" viewBox="0 0 50 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M25.0012 28C28.1589 28 49 3.44748 49 2.04892C49 0.650358 41.3334 0.650358 41.3334 2.04892C41.3334 3.44748 26.7379 20.4268 25.0012 20.4268C23.2644 20.4268 8.66711 3.44748 8.66711 2.04892C8.66711 0.650358 0.844475 0.650358 1.00236 2.04892C1.16025 3.44748 21.8434 28 25.0012 28Z" fill="#F1F6FE" stroke="#F1F6FE"/>
           </svg>
-        </span>
+        </motion.span>
       )}
       <Circle progress={progress}>
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="22.5rem" height="22.5rem">
           <defs>
               <linearGradient id="GradientColor">
                 <stop offset="0%" stopColor={(
-                  !hasStarted && !isInBreak ? '#0D5CD3' : hasStarted && !isInBreak ? '#669FF5' : '#BEF566'
+                  !hasStarted && !isInBreak ? '#0D5CD3' : hasStarted && !isInBreak ? '#2E7DF2' : '#BEF566'
                 )} />
                 <stop offset="100%" stopColor={(
-                  !hasStarted && !isInBreak ? '#04193A' : hasStarted && !isInBreak ? '#0D5CD3' : '#70E000'
+                  !hasStarted && !isInBreak ? '#04193A' : hasStarted && !isInBreak ? '#083172' : '#70E000'
                 )} />
               </linearGradient>
           </defs>
@@ -86,11 +87,11 @@ export const Timer = ({
         </Time>
       </Circle>
       {!hasStarted && (
-        <span onClick={handleIncreaseTime}>
+        <motion.span onClick={handleIncreaseTime} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
           <svg width="50" height="29" viewBox="0 0 50 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M24.9988 1C21.8411 1 1 25.5525 1 26.9511C1 28.3496 8.66658 28.3496 8.66658 26.9511C8.66658 25.5525 23.2621 8.57317 24.9988 8.57317C26.7356 8.57317 41.3329 25.5525 41.3329 26.9511C41.3329 28.3496 49.1555 28.3496 48.9976 26.9511C48.8398 25.5525 28.1566 1 24.9988 1Z" fill="#F1F6FE" stroke="#F1F6FE"/>
           </svg>
-        </span>
+        </motion.span>
       )}
     </Container>
   );

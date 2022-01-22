@@ -18,7 +18,6 @@ export const Selector = ({
 
   function handleChangeToTaskState() {
     if (isInBreak && !hasStarted){
-      console.log('I am in break and stopped');
       setIsInBreak(false);
     }
   }

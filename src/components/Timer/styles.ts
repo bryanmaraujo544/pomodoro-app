@@ -18,7 +18,7 @@ export const Container = styled.div`
 
     svg {
       width: 4.2rem;
-      filter: drop-shadow(0px 0px 16px #ffffff60);
+      filter: drop-shadow(0px 0px 16px #ffffff80);
     }
   }
 `;
@@ -34,6 +34,7 @@ export const Circle = styled.div<CircleProps>`
   height: 22.5rem;
   aspect-ratio: 1 / 1;
   margin: 0;
+  /* filter: drop-shadow(0 0 2px #00000010); */
 
   @media(max-width: 400px) {
     width: 20rem;
@@ -67,6 +68,7 @@ export const Circle = styled.div<CircleProps>`
     fill: none;
     stroke: url(#GradientColor);
     stroke-width: 1rem;
+    filter: drop-shadow(0 0 3px #00000030);
 
     @media(max-width: 468px) {
       cx: 99;
